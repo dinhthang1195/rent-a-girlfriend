@@ -19,7 +19,7 @@ function NavSection() {
           </Nav.Link>
 
           <Nav.Link
-            href='/price-plan'
+            href='/plan-price'
             className=' plan-price border-end  text-nowrap py-0 px-5  text-decoration-none text-black '
           >
             Price / Date Plan

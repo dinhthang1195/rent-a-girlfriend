@@ -42,3 +42,20 @@ code {
   border-color: #660505 !important;
   color: #ffffff !important;
 }
+
+.plan-price {
+  padding: 0 20px;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+}
+.plan-price::after:hover,
+.plan-price::before:hover {
+  content: '';
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  background: #555;
+  transform: translateY(-50%);
+}
