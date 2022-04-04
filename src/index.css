@@ -15,7 +15,30 @@ code {
   padding-right: 15rem;
 }
 
-.btn-sign-in {
+.btn-sign-in,
+.btn-sign-in:visited {
   background-color: #fd9090 !important;
   border-color: #fd9090 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-sign-in:active,
+.btn-sign-in:hover {
+  background-color: #ffffff !important;
+  border-color: #fd9090 !important;
+  color: #fd9090 !important;
+}
+.btn-light,
+.btn-light:visited {
+  background-color: #c7c4c4 !important;
+  border-color: #c7c4c4 !important;
+  color: #414040 !important;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+.btn-light:active,
+.btn-light:hover {
+  background-color: #660505 !important;
+  border-color: #660505 !important;
+  color: #ffffff !important;
 }
