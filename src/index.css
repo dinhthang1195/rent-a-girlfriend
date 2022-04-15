@@ -43,19 +43,27 @@ code {
   color: #ffffff !important;
 }
 
-.plan-price {
-  padding: 0 20px;
-  position: relative;
-  text-align: center;
-  display: inline-block;
+.plan-price:hover {
+  border-bottom: 3px solid rgb(176, 182, 3) !important;
+  padding-bottom: 3.2% !important;
 }
-.plan-price::after:hover,
-.plan-price::before:hover {
-  content: '';
+
+.footer-bg {
+  background-image: url('./images/landingpage/footer-back-hand.png');
   width: 100%;
-  position: absolute;
-  top: 50%;
-  height: 1px;
-  background: #555;
-  transform: translateY(-50%);
+  height: 18rem;
+}
+
+.footer-bg-2 {
+  background-color: #fd9090;
+}
+
+a {
+  text-decoration: none !important;
+  color: #ffffff !important;
+}
+
+ul {
+  list-style-type: none !important;
+  line-height: 2.5rem !important;
 }

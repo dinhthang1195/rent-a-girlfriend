@@ -1,55 +1,57 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import Logo from '../images/logo.png';
-import Button from 'react-bootstrap/Button';
+import Logo from '../images/landingpage/logo.png';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
 function NavSection() {
   return (
     <>
-      <Navbar sticky='top' className='  py-4 '>
-        <Container>
-          <div className='logo '>
+      <div className=' d-flex '>
+        <nav className='sticky-top ps-5 py-4 '>
+          <div className='logo d-inline-block '>
             <img src={Logo} alt='logo' />
           </div>
 
-          <Nav.Link href='/cast' className=' border-end text-nowrap py-0 px-5 text-decoration-none text-black '>
+          <Link
+            to='/cast'
+            className=' d-inline-block border-end text-nowrap py-0 px-5 text-decoration-none text-black  '
+          >
             Girlfriend List
-          </Nav.Link>
+          </Link>
 
-          <Nav.Link
-            href='/plan-price'
-            className=' plan-price border-end  text-nowrap py-0 px-5  text-decoration-none text-black '
-          >
+          <Link to='/plan-price' className='  plan-price  text-nowrap py-0 px-5  text-decoration-none text-black  '>
             Price / Date Plan
-          </Nav.Link>
+          </Link>
 
-          <Nav.Link href='/usage' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
-            How to use
-          </Nav.Link>
-
-          <Nav.Link
-            href='/experience'
-            className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '
+          <Link
+            to='/usage'
+            className=' border-end border-start  text-nowrap py-0 px-5   text-decoration-none text-black '
           >
+            How to use
+          </Link>
+
+          <Link to='/experience' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
             Customer Experience
-          </Nav.Link>
+          </Link>
 
-          <Nav.Link href='/faq' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
+          <Link to='/faq' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
             FAQ
-          </Nav.Link>
+          </Link>
+        </nav>
 
-          <div className=' d-flex ms-3'>
-            <span className='  '>
-              <button className=' btn col-auto text-nowrap btn-sign-in me-1 '>Sign In</button>
-            </span>
-            <span className=''>
-              <button className=' btn col-auto text-nowrap btn-light '>Sign Up</button>
-            </span>
-          </div>
-        </Container>
-      </Navbar>
+        <nav className='sticky-top ms-3'>
+          <span>
+            <button className='d-block h-50 w-100 btn text-nowrap btn-sign-in me-1 '>Sign In</button>
+          </span>
+          <span>
+            <button className='d-block h-50 w-100 btn text-nowrap btn-light '>Sign Up</button>
+          </span>
+        </nav>
+        <nav className='ms-3 align-self-center'>
+          <span className=' fw-bold '>Forgot password?</span>
+        </nav>
+      </div>
     </>
   );
 }
