@@ -1,7 +1,4 @@
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 import Logo from '../images/landingpage/logo.png';
-import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
 function NavSection() {
@@ -15,13 +12,16 @@ function NavSection() {
 
           <Link
             to='/cast'
-            className=' d-inline-block border-end text-nowrap py-0 px-5 text-decoration-none text-black  '
+            className=' d-inline-block border-end text-nowrap py-0 px-4 ps-5 text-decoration-none text-black  '
           >
             Girlfriend List
           </Link>
 
-          <Link to='/plan-price' className='  plan-price  text-nowrap py-0 px-5  text-decoration-none text-black  '>
-            Price / Date Plan
+          <Link to='/plan-price' className=' text-nowrap border-end py-0 px-5  text-decoration-none text-black  '>
+            Price
+          </Link>
+          <Link to='/plan-price' className='text-nowrap py-0 px-5  text-decoration-none text-black  '>
+            Date Plan
           </Link>
 
           <Link
@@ -31,11 +31,11 @@ function NavSection() {
             How to use
           </Link>
 
-          <Link to='/experience' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
+          <Link to='/experience' className=' border-end  text-nowrap py-0 px-4   text-decoration-none text-black '>
             Customer Experience
           </Link>
 
-          <Link to='/faq' className=' border-end  text-nowrap py-0 px-5   text-decoration-none text-black '>
+          <Link to='/faq' className=' border-end  text-nowrap py-0 px-4   text-decoration-none text-black '>
             FAQ
           </Link>
         </nav>
