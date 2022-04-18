@@ -7,9 +7,11 @@ import CastSingle from './pages/CastSingle';
 import Usage from './pages/Usage';
 import Experience from './pages/Experience';
 import FAQ from './pages/FAQ';
+import Login from './components/Login';
 
 const routes = [
   { path: '/', page: <Landing /> },
+  { path: '/login', page: <Login /> },
   { path: '/usage', page: <Usage /> },
   { path: '/experience', page: <Experience /> },
   { path: '/faq', page: <FAQ /> },
