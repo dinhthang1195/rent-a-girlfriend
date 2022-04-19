@@ -3,7 +3,7 @@ import store from '../store/index';
 // import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 const url = {
-  baseUrl: 'https://rental-gf.herokuapp.com/',
+  baseUrl: 'https://rental-gf.herokuapp.com',
   login: '/auth',
 };
 
