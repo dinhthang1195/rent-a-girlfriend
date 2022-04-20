@@ -24,13 +24,12 @@ instance.interceptors.request.use((request) => {
   return request;
 });
 
-// instance.interceptors.request.use((request) => request);
 instance.interceptors.response.use(
   (response) => {
     // setTimeout(() => {
     //   store.dispatch(hideLoading());
     // }, 100);
-    return response.data;
+    return response;
   },
   (error) => {
     // setTimeout(() => {
@@ -41,7 +40,9 @@ instance.interceptors.response.use(
     } else {
       switch (error.response.status) {
         case 401:
-          window.location.href = '/login';
+          if (!window.location.href.endsWith('/login')) {
+            window.location.href = '/login';
+          }
           break;
         case 403:
           window.location.href = '/no-permission';

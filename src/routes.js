@@ -8,6 +8,7 @@ import Usage from './pages/Usage';
 import Experience from './pages/Experience';
 import FAQ from './pages/FAQ';
 import Login from './components/Login';
+import Admin from './pages/Admin/Admin';
 
 const routes = [
   { path: '/', page: <Landing /> },
@@ -20,6 +21,7 @@ const routes = [
   { path: '/price', page: <Price /> },
   { path: '/cast/*', page: <Cast /> },
   { path: '/cast/tachibana-ryo', page: <CastSingle /> },
+  { path: '/admin/*', page: <Admin /> },
 ];
 
 export default routes;

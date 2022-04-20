@@ -1,69 +1,3 @@
-// import Input from './Input';
-// import { useRef, useState, useEffect, useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import NavSection from './NavSection';
-// import FooterSection from './FooterSection';
-// import api from '../services/api';
-
-// function Login() {
-//   return (
-//     <>
-//       <NavSection />
-//       <div className='container h-100'>
-//         <div className='row justify-content-center h-100 align-items-center'>
-//           <div className='col-sm-8 col-lg-5'>
-//             <div className='card footer-bg-2'>
-//               <div className='card-header text-white'>
-//                 <h4 className='card-title mb-0'>
-//                   <i className='bi-grid-3x3-gap-fill'></i> Login
-//                 </h4>
-//               </div>
-//               <div className='card-body bg-white rounded-bottom'>
-//                 <p className='text-center text-danger'>{success ? '' : errMsg}</p>
-//                 <form onSubmit={handleSubmit}>
-//                   <Input
-//                     onChange={(e) => setUser(e.target.value)}
-//                     value={user}
-//                     inputRef={usernameRef}
-//                     title={'Username'}
-//                     id={'username'}
-//                     name={'username'}
-//                     placeholder={'Enter your username'}
-//                     labelSize='4'
-//                     autoComplete='off'
-//                     required
-//                   />
-//                   <Input
-//                     onChange={(e) => setPwd(e.target.value)}
-//                     value={pwd}
-//                     title={'Password'}
-//                     id={'password'}
-//                     name={'password'}
-//                     placeholder={'Enter password'}
-//                     labelSize='4'
-//                     required
-//                   />
-
-//                   <div className='row'>
-//                     <div className='offset-sm-4 col-auto'>
-//                       <button type='submit' className='btn footer-bg-2 btn-sign-in '>
-//                         Sign in
-//                       </button>
-//                     </div>
-//                   </div>
-//                 </form>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       <FooterSection />
-//     </>
-//   );
-// }
-
-// export default Login;
-
 import Input from './Input';
 import { useRef, useState, useEffect } from 'react';
 import userService from '../services/userService';
@@ -77,6 +11,7 @@ function Login() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
 
   const handleLoginAction = (token, userInfo) => {
     dispatch({
@@ -91,20 +26,29 @@ function Login() {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
 
-    userService.login(username, password).then((res) => {
-      if (res.errorCode === 0) {
+    userService.login(username, password).then(
+      (res) => {
         setMessage('');
         navigate('/');
         handleLoginAction(res.data.accessToken, res.data);
-      } else {
+
+        console.log(res.data);
+      },
+      (err) => {
         setMessage('Wrong username or password!');
       }
-    });
+    );
   };
 
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className='container h-100'>
@@ -139,8 +83,8 @@ function Login() {
 
                 <div className='row'>
                   <div className='offset-sm-4 col-auto'>
-                    <button type='submit' className='btn footer-bg-2 btn-sign-in'>
-                      Sign in
+                    <button type='submit' className='btn  btn-light-alt'>
+                      Log in
                     </button>
                   </div>
                 </div>

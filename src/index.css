@@ -21,37 +21,55 @@ code {
   padding-right: 15rem;
 }
 
-.btn-sign-in,
-.btn-sign-in:visited {
+.btn-light,
+.btn-light-alt {
+  min-width: 100px !important;
+}
+.btn-sign-in {
+  min-width: 100px !important;
+}
+.btn-sign-in:active,
+.btn-sign-in:hover {
   background-color: #fd9090 !important;
   border-color: #fd9090 !important;
   color: #ffffff !important;
   transition: background-color 0.2s, border 0.2s, color 0.2s;
 }
 
-.btn-sign-in:active,
-.btn-sign-in:hover {
+.btn-sign-in,
+.btn-sign-in:visited {
   background-color: #ffffff !important;
   border-color: #fd9090 !important;
   color: #fd9090 !important;
 }
-.btn-light,
-.btn-light:visited {
-  background-color: #c7c4c4 !important;
-  border-color: #c7c4c4 !important;
-  color: #414040 !important;
-  transition: background-color 0.2s, border 0.2s, color 0.2s;
-}
 .btn-light:active,
 .btn-light:hover {
+  background-color: #fd9090 !important;
+  border-color: #fd9090 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-light,
+.btn-light:visited {
   background-color: #660505 !important;
   border-color: #660505 !important;
   color: #ffffff !important;
 }
 
-.plan-price:hover {
-  border-bottom: 3px solid rgb(176, 182, 3) !important;
-  padding-bottom: 3.2% !important;
+.btn-light-alt,
+.btn-light-alt:visited {
+  background-color: #fd9090 !important;
+  border-color: #fd9090 !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-light-alt:active,
+.btn-light-alt:hover {
+  background-color: #660505 !important;
+  border-color: #660505 !important;
+  color: #ffffff !important;
 }
 
 .footer-bg {
@@ -71,7 +89,7 @@ a {
 
 ul {
   list-style-type: none !important;
-  line-height: 2.5rem !important;
+  line-height: 1.5rem !important;
 }
 
 .hero-header {
@@ -89,4 +107,21 @@ ul {
   height: 53% !important;
   transform: translateY(5rem);
   position: sticky;
+}
+
+.navbar-scroll .nav-link,
+.navbar-scroll .fa-bars,
+.navbar-scroll .navar-brand {
+  color: #4f4f4f !important;
+}
+
+.navbar-scroll .nav-link:hover {
+  color: #fd9090 !important;
+}
+
+.welcome {
+  background-color: #014d0b !important;
+  border-color: #014d0b !important;
+  color: #ffffff !important;
+  cursor: none !important;
 }

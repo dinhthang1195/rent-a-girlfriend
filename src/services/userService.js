@@ -1,7 +1,7 @@
 import api from './api';
 
 const login = (username, password) => {
-  const data = { username, password };
+  const data = { user: username, pwd: password };
   return api.post(api.url.login, data);
 };
 
