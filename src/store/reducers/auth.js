@@ -28,6 +28,7 @@ const authReducer = (state = initialState, action) => {
         token: null,
         currentUser: {},
       };
+
     default:
       return { ...state };
   }

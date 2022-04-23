@@ -9,40 +9,44 @@ import FooterLogo from '../images/landingpage/footer-logo.png';
 function FooterSection() {
   return (
     <>
-      <div className=' d-flex justify-content-center align-items-center footer-bg  '>
-        <div className='d-inline-block me-5 '>
-          <img src={ContactLogo} alt='contact' />
-        </div>
-        <div className=' d-inline-block ms-5 '>
-          <img src={DialLogo} alt='contact' />
+      <div className='footer-bg '>
+        <div className=' container h-100'>
+          <div className='row align-items-center h-100 text-center '>
+            <div className='col-md-12 col-lg-6  '>
+              <img src={ContactLogo} alt='contact' />
+            </div>
+            <div className='col-md-12 col-lg-6 '>
+              <img src={DialLogo} alt='dial' />
+            </div>
+          </div>
         </div>
       </div>
-      <div className='container'>
-        <div className='row my-5 ms-4 me-4'>
-          <div className='col'>
+      <div className='container '>
+        <div className='row my-5 ms-4 me-4 align-items-center h-100 text-center '>
+          <div className='col-lg-6 col-xl-3'>
             <img src={ProhibitLogo} alt='ProhibitLogo' />
           </div>
-          <div className='col'>
+          <div className='col-lg-6 col-xl-3'>
             <img src={DateLogo} alt='DateLogo' />
           </div>
-          <div className='col'>
+          <div className='col-lg-6 col-xl-3'>
             <img src={RecruitLogo} alt='RecruitLogo' />
           </div>
-          <div className='col'>
+          <div className='col-lg-6 col-xl-3'>
             <img src={BlogLogo} alt='BlogLogo' />
           </div>
         </div>
       </div>
       <div className='footer-bg-2 p-5 '>
         <div className='container '>
-          <div className='row text-white py-3 pb-5'>
-            <div className='col'>
+          <div className='row text-white py-3 pb-5 align-items-center h-100 text-center'>
+            <div className='col-lg-6 col-xl-3 my-2'>
               <div className='box'>
                 <p>Rental girlfriend in Tokyo / Kanagawa / Chiba / Saitama</p>
                 <img src={FooterLogo} alt='FooterLogo' />
               </div>
             </div>
-            <div className='col'>
+            <div className='col-lg-6 col-xl-3 my-2'>
               <div className='box'>
                 <ul>
                   <li>
@@ -60,7 +64,7 @@ function FooterSection() {
                 </ul>
               </div>
             </div>
-            <div className='col'>
+            <div className='col-lg-6 col-xl-3 my-2'>
               <div className='box'>
                 <ul>
                   <li>
@@ -79,7 +83,7 @@ function FooterSection() {
                 </ul>
               </div>
             </div>
-            <div className='col'>
+            <div className='col-lg-6 col-xl-3 my-2'>
               <div className='box'>
                 <ul>
                   <li>

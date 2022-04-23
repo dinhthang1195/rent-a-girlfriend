@@ -36,6 +36,7 @@ function Login() {
       },
       (err) => {
         setMessage('Wrong username or password!');
+        console.log(err);
       }
     );
   };
@@ -71,6 +72,7 @@ function Login() {
                   placeholder={'Enter your name'}
                   labelSize='4'
                   autoComplete='off'
+                  type={'text'}
                 />
                 <Input
                   inputRef={passwordRef}
@@ -79,6 +81,7 @@ function Login() {
                   name={'password'}
                   placeholder={'Enter password'}
                   labelSize='4'
+                  type={'password'}
                 />
 
                 <div className='row'>
@@ -86,6 +89,19 @@ function Login() {
                     <button type='submit' className='btn  btn-light-alt'>
                       Log in
                     </button>
+                  </div>
+                </div>
+                <div className='row mt-5  '>
+                  <div className='col-auto'>
+                    <p>
+                      Don't have an account?
+                      <br />
+                      <span>
+                        <a className=' text-black text-decoration-underline ' href='/signup'>
+                          Sign Up
+                        </a>
+                      </span>
+                    </p>
                   </div>
                 </div>
               </form>

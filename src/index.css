@@ -81,6 +81,12 @@ code {
 .footer-bg-2 {
   background-color: #fd9090 !important;
 }
+.bg-infor {
+  background-color: #fae9e9 !important;
+}
+.bg-inform {
+  background-color: #fff9e0 !important;
+}
 
 a {
   text-decoration: none !important;
@@ -104,7 +110,7 @@ ul {
 
 .catch-logo {
   width: 40% !important;
-  height: 53% !important;
+  /* height: 53% !important; */
   transform: translateY(5rem);
   position: sticky;
 }
@@ -124,4 +130,35 @@ ul {
   border-color: #014d0b !important;
   color: #ffffff !important;
   cursor: none !important;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.h-20 {
+  height: 20% !important;
+}
+
+.h-35 {
+  height: 35% !important;
+}
+.h-40 {
+  height: 40% !important;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+.w-40 {
+  width: 40% !important;
 }

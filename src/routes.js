@@ -9,13 +9,17 @@ import Experience from './pages/Experience';
 import FAQ from './pages/FAQ';
 import Login from './components/Login';
 import Admin from './pages/Admin/Admin';
+import SignUp from './components/landing/SignUp';
+import Recruit from './pages/Recruit';
 
 const routes = [
   { path: '/', page: <Landing /> },
   { path: '/login', page: <Login /> },
+  { path: '/signup', page: <SignUp /> },
   { path: '/usage', page: <Usage /> },
   { path: '/experience', page: <Experience /> },
   { path: '/faq', page: <FAQ /> },
+  { path: '/recruit', page: <Recruit /> },
   // { path: '/plan-price/*', page: <PlanPrice /> },
   { path: '/plan', page: <Plan /> },
   { path: '/price', page: <Price /> },

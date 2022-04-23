@@ -10,35 +10,41 @@ function SignInButtonGroup({ handleSignIn, handleLogOut }) {
   if (!isLoggedIn) {
     return (
       <>
-        <li className='nav-item me-3  '>
-          <button onClick={handleSignIn} className=' btn text-nowrap btn-sign-in mb-2  '>
-            Log In
-          </button>
-        </li>
-        <li className='nav-item'>
-          <button className='  btn text-nowrap btn-light '>Sign Up</button>
-        </li>
+        <ul className='navbar-nav'>
+          <li className='nav-item me-3  '>
+            <button onClick={handleSignIn} className=' btn text-nowrap btn-sign-in mb-2  '>
+              Log In
+            </button>
+          </li>
+          <li className='nav-item'>
+            <button className=' btn text-nowrap btn-light ' onClick={() => navigate('/signup')}>
+              Sign Up
+            </button>
+          </li>
+        </ul>
       </>
     );
   }
   if (isLoggedIn && userInfo.roles.includes(5150)) {
     return (
       <>
-        <li className='nav-item me-3  '>
-          <button onClick={() => navigate('/admin')} className=' btn text-nowrap btn-primary mb-2 '>
-            Administration
-          </button>
-        </li>
-        <li className='nav-item  '>
-          <button onClick={handleLogOut} className=' btn text-nowrap btn-danger  '>
-            <FontAwesomeIcon icon={faRightFromBracket} />
-          </button>
-        </li>
+        <ul className='navbar-nav'>
+          <li className='nav-item me-3  '>
+            <button onClick={() => navigate('/admin')} className=' btn text-nowrap btn-primary mb-2 '>
+              Administration
+            </button>
+          </li>
+          <li className='nav-item  '>
+            <button onClick={handleLogOut} className=' btn text-nowrap btn-danger  '>
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </button>
+          </li>
+        </ul>
       </>
     );
   }
   return (
-    <>
+    <ul className='navbar-nav'>
       <li className='nav-item me-3  '>
         <div className=' btn text-nowrap welcome mb-2 '>Hi There!</div>
       </li>
@@ -47,7 +53,7 @@ function SignInButtonGroup({ handleSignIn, handleLogOut }) {
           <FontAwesomeIcon icon={faRightFromBracket} />
         </button>
       </li>
-    </>
+    </ul>
   );
 }
 

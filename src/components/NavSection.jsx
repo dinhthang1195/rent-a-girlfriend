@@ -24,9 +24,16 @@ function NavSection() {
 
   return (
     <>
-      <nav className='navbar navbar-expand-lg fixed-top navbar-scroll z-idx p-3 py-4'>
+      <nav className='navbar navbar-expand-xl fixed-top navbar-scroll z-idx p-3 py-4'>
         <div className='container'>
-          <img src={Logo} height='70' alt='' loading='lazy' />
+          <img
+            src={Logo}
+            height='70'
+            alt=''
+            loading='lazy'
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/')}
+          />
           <button
             className='navbar-toggler'
             type='button'
@@ -41,39 +48,39 @@ function NavSection() {
             </span>
           </button>
           <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-            <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+            <ul className='navbar-nav  me-auto mb-2 mb-lg-0'>
               <li className='nav-item active'>
-                <a className='nav-link' aria-current='page' href='/cast'>
+                <a className='nav-link' href='/cast'>
                   Girlfriend List
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='/plan'>
+                <a className='nav-link' href='/plan'>
                   Date Plan
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='/price'>
+                <a className='nav-link' href='/price'>
                   Price
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='/usage'>
+                <a className='nav-link' href='/usage'>
                   How to use
                 </a>
               </li>
               <li className='nav-item'>
-                <a className='nav-link' aria-current='page' href='/experience'>
-                  Customer Experience
+                <a className='nav-link' href='/experience'>
+                  Experience
                 </a>
               </li>
-              <li className='nav-item me-3'>
-                <a className='nav-link' aria-current='page' href='/faq'>
+              <li className='nav-item '>
+                <a className='nav-link' href='/faq'>
                   FAQ
                 </a>
               </li>
-              <SignInButtonGroup handleSignIn={handleSignIn} handleLogOut={handleLogOut} />
             </ul>
+            <SignInButtonGroup handleSignIn={handleSignIn} handleLogOut={handleLogOut} />
           </div>
         </div>
       </nav>

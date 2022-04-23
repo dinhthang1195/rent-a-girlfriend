@@ -1,10 +1,11 @@
 import axios from 'axios';
 import store from '../store/index';
-// import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 const url = {
   baseUrl: 'https://rental-gf.herokuapp.com',
   login: '/auth',
+  signup: '/register',
+  employee: '/employees',
 };
 
 const instance = axios.create({
@@ -20,24 +21,19 @@ instance.interceptors.request.use((request) => {
   if (state.auth.token) {
     request.headers.Authorization = `Bearer ${state.auth.token}`;
   }
-  // store.dispatch(showLoading());
+
   return request;
 });
 
 instance.interceptors.response.use(
   (response) => {
-    // setTimeout(() => {
-    //   store.dispatch(hideLoading());
-    // }, 100);
     return response;
   },
   (error) => {
-    // setTimeout(() => {
-    //   store.dispatch(hideLoading());
-    // }, 100);
     if (!error.response) {
       window.location.href = '/no-internet';
     } else {
+      console.log(error.response);
       switch (error.response.status) {
         case 401:
           if (!window.location.href.endsWith('/login')) {
@@ -45,7 +41,7 @@ instance.interceptors.response.use(
           }
           break;
         case 403:
-          window.location.href = '/no-permission';
+          // window.location.href = '/no-permission';
           break;
         default:
           break;
