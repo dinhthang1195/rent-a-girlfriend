@@ -12,8 +12,8 @@ function Popular() {
       <EmployeeLanding />
       <div className='container'>
         <div className='row align-items-center h-100 text-center'>
-          <div className=' col mx-auto footer-bg-3 '>
-            <img src={OnlinePic} alt='' />
+          <div className=' col mx-auto footer-bg-3  '>
+            <img src={OnlinePic} alt='' className='img-fluid' />
           </div>
         </div>
       </div>

@@ -76,12 +76,12 @@ function Login() {
                 />
                 <Input
                   inputRef={passwordRef}
-                  title={'Password'}
-                  id={'password'}
-                  name={'password'}
-                  placeholder={'Enter password'}
+                  title='Password'
+                  id='password'
+                  name='password'
+                  placeholder='Enter password'
                   labelSize='4'
-                  type={'password'}
+                  type='password'
                 />
 
                 <div className='row'>

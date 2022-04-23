@@ -18,7 +18,7 @@ function InfoLanding() {
                 <img
                   src={RecruitLogo}
                   alt=''
-                  className=' w-100'
+                  className=' img-fluid'
                   style={{ cursor: 'pointer' }}
                   onClick={() => navigate('/recruit')}
                 />
@@ -32,14 +32,14 @@ function InfoLanding() {
           <div className=' col pt-4 bg-inform px-5  '>
             <div className='container'>
               <div className='row align-items-center h-100 text-center'>
-                <p className=' fs-1 text-danger py-2 mt-2 '>--Part-time job experience--</p>
+                <p className=' fs-1 text-danger py-2 mt-2 '>--Job experience--</p>
                 <p className=' fs-4 mx-auto py-3 mb-4 '>Tenchimu also experienced a part-time job</p>
                 <img
                   src={YoutubeLogo}
                   onClick={() => window.location.replace('https://www.youtube.com/watch?v=drBtEtgVRPI')}
                   alt=''
                   style={{ cursor: 'pointer' }}
-                  className=' w-100'
+                  className=' img-fluid'
                 />
                 <button
                   onClick={() => window.location.replace('https://www.youtube.com/watch?v=drBtEtgVRPI')}
@@ -57,8 +57,8 @@ function InfoLanding() {
             <div className='container'>
               <div className='row align-items-center h-100 text-center'>
                 <p className=' fs-1 text-danger py-2 mt-2 '>- PLAN / PRICE -</p>
-                <p className=' fs-4 mx-auto py-3 mb-4 '>Rental her price / charge</p>
-                <img src={PriceLogo} alt='' style={{ cursor: 'pointer' }} className=' w-100' />
+                <p className=' fs-4 mx-auto py-3 mb-4 '>Rental cost</p>
+                <img src={PriceLogo} alt='' style={{ cursor: 'pointer' }} className=' img-fluid' />
                 <p className='mt-3'>
                   From 6,000 yen per hour (6,600 yen including tax). We offer prices and date plans to suit your needs.
                   We set prices that match the cuteness and popularity of girls.
@@ -73,13 +73,14 @@ function InfoLanding() {
           <div className=' col pt-4 bg-inform px-5  '>
             <div className='container'>
               <div className='row align-items-center h-100 text-center'>
-                <p className=' fs-1 text-danger py-2 mt-2 '>- What customers say? -</p>
+                <p className=' fs-1 text-danger py-2 mt-2 '>-Customers say?-</p>
                 <p className=' fs-4 mx-auto py-3 mb-4 '>Customer experience</p>
-                <img src={ExpLogo} alt='' style={{ cursor: 'pointer' }} className=' w-100' />
+                <img src={ExpLogo} alt='' style={{ cursor: 'pointer' }} className=' img-fluid' />
                 <p className='mt-3'>
                   There are many joyful voices such as "The outlook on life has changed" and "I'm glad I used her
-                  rental." We also receive comments such as "It's a lot of fun because we have the same hobbies."
+                  rental." We also receive so many other positive comments."
                 </p>
+                {/* TODO: responsive text inside button */}
                 <button
                   className='btn btn-sign-in w-50 mb-5 text-nowrap mx-auto'
                   onClick={() => navigate('/experience')}
