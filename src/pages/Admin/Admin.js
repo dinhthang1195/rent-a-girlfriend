@@ -1,55 +1,51 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTruck, faUser, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { faDiagramProject } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { faGifts } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
+
+import React, { useState } from 'react';
 
 function Admin() {
+  const [sidebarShown, setSidebarShown] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarShown(!sidebarShown);
+  };
   return (
     <>
-      <div className='d-flex text-black' id='wrapper'>
-        <div className='bg-white ' id='sidebar-wrapper'>
+      <div className={sidebarShown ? `d-flex` : `d-flex toggled`} id='wrapper'>
+        <div className='bg-white' id='sidebar-wrapper'>
           <div className='sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom'>
-            <i className='fas fa-user-secret me-2' />
             ADMIN PAGE
           </div>
           <div className='list-group list-group-flush my-3'>
-            <a href='#' className='list-group-item text-black list-group-item-action bg-transparent second-text active'>
-              Dashboard
+            <a href='#' className='list-group-item list-group-item-action bg-transparent second-text active'>
+              <FontAwesomeIcon icon={faUserSecret} /> Dashboard
             </a>
-            <a
-              href='#'
-              className='list-group-item text-black list-group-item-action bg-transparent second-text fw-bold'
-            >
-              Projects
+            <a href='#' className='list-group-item list-group-item-action bg-transparent second-text fw-bold'>
+              <FontAwesomeIcon icon={faDiagramProject} /> Projects
             </a>
-            <a
-              href='#'
-              className='list-group-item text-black list-group-item-action bg-transparent second-text fw-bold'
-            >
-              Analytics
+            <a href='#' className='list-group-item list-group-item-action bg-transparent second-text fw-bold'>
+              <FontAwesomeIcon icon={faChartLine} /> Analytics
             </a>
-            <a
-              href='#'
-              className='list-group-item text-black list-group-item-action bg-transparent second-text fw-bold'
-            >
-              Reports
-            </a>
-            <a
-              href='#'
-              className='list-group-item text-black list-group-item-action bg-transparent second-text fw-bold'
-            >
-              Store Mng
-            </a>
-            <a
-              href='#'
-              className='list-group-item text-black list-group-item-action bg-transparent second-text fw-bold'
-            >
-              Products
+            <a href='#' className='list-group-item list-group-item-action bg-transparent second-text fw-bold'>
+              <FontAwesomeIcon icon={faPaperclip} /> Reports
             </a>
           </div>
         </div>
         <div id='page-content-wrapper'>
           <nav className='navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4'>
             <div className='d-flex align-items-center'>
-              <i className='fas fa-align-left primary-text fs-4 me-3' id='menu-toggle' />
+              <FontAwesomeIcon
+                icon={faAlignLeft}
+                className='primary-text fs-4 me-3'
+                id='menu-toggle'
+                onClick={() => toggleSidebar()}
+              />
               <h2 className='fs-2 m-0'>Dashboard</h2>
             </div>
             <button
@@ -61,35 +57,34 @@ function Admin() {
               aria-expanded='false'
               aria-label='Toggle navigation'
             >
-              <span className='navbar-toggler-icon '>{/* <FontAwesomeIcon icon={faInfoCircle} /> */}</span>
+              <span className='navbar-toggler-icon' />
             </button>
             <div className='collapse navbar-collapse' id='navbarSupportedContent'>
               <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
                 <li className='nav-item dropdown'>
                   <a
-                    className='text-black nav-link dropdown-toggle second-text fw-bold'
+                    className='nav-link dropdown-toggle text-black fw-bold'
                     href='#'
                     id='navbarDropdown'
                     role='button'
                     data-bs-toggle='dropdown'
                     aria-expanded='false'
                   >
-                    <i className='fas fa-user me-2' />
-                    ADMIN
+                    <FontAwesomeIcon icon={faUser} /> John Doe
                   </a>
-                  <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
+                  <ul className='dropdown-menu ' aria-labelledby='navbarDropdown'>
                     <li>
-                      <a className='text-black dropdown-item' href='#'>
+                      <a className='dropdown-item text-black' href='#'>
                         Profile
                       </a>
                     </li>
                     <li>
-                      <a className='text-black dropdown-item' href='#'>
+                      <a className='dropdown-item text-black' href='#'>
                         Settings
                       </a>
                     </li>
                     <li>
-                      <a className='text-black dropdown-item' href='#'>
+                      <a className='dropdown-item text-black' href='#'>
                         Logout
                       </a>
                     </li>
@@ -106,7 +101,8 @@ function Admin() {
                     <h3 className='fs-2'>720</h3>
                     <p className='fs-5'>Products</p>
                   </div>
-                  <i className='fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3' />
+                  {/* <i className='fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3' /> */}
+                  <FontAwesomeIcon icon={faGifts} className='fs-1 primary-text border rounded-full secondary-bg p-3' />
                 </div>
               </div>
               <div className='col-md-3'>
@@ -115,7 +111,11 @@ function Admin() {
                     <h3 className='fs-2'>4920</h3>
                     <p className='fs-5'>Sales</p>
                   </div>
-                  <i className='fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3' />
+                  {/* <i className='fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3' /> */}
+                  <FontAwesomeIcon
+                    icon={faHandHoldingUsd}
+                    className='fs-1 primary-text border rounded-full secondary-bg p-3'
+                  />
                 </div>
               </div>
               <div className='col-md-3'>
@@ -124,7 +124,8 @@ function Admin() {
                     <h3 className='fs-2'>3899</h3>
                     <p className='fs-5'>Delivery</p>
                   </div>
-                  <i className='fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3' />
+                  {/* <i className='fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3' /> */}
+                  <FontAwesomeIcon icon={faTruck} className='fs-1 primary-text border rounded-full secondary-bg p-3' />
                 </div>
               </div>
               <div className='col-md-3'>
@@ -133,7 +134,10 @@ function Admin() {
                     <h3 className='fs-2'>%25</h3>
                     <p className='fs-5'>Increase</p>
                   </div>
-                  <i className='fas fa-chart-line fs-1 primary-text border rounded-full secondary-bg p-3' />
+                  <FontAwesomeIcon
+                    icon={faChartLine}
+                    className='fs-1 primary-text border rounded-full secondary-bg p-3'
+                  />
                 </div>
               </div>
             </div>
