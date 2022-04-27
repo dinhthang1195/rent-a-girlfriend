@@ -11,6 +11,8 @@ import Login from './components/Login';
 import Admin from './pages/Admin/Admin';
 import SignUp from './components/landing/SignUp';
 import Recruit from './pages/Recruit';
+import UserManage from './pages/Admin/UserManage';
+import EmployeeManage from './pages/Admin/EmployeeManage';
 
 const routes = [
   { path: '/', page: <Landing /> },
@@ -25,7 +27,10 @@ const routes = [
   { path: '/price', page: <Price /> },
   { path: '/cast/*', page: <Cast /> },
   { path: '/cast/tachibana-ryo', page: <CastSingle /> },
-  { path: '/admin/*', page: <Admin /> },
+
+  { path: '/admin/dashboard', page: <Admin /> },
+  { path: '/admin/user', page: <UserManage /> },
+  { path: '/admin/employee', page: <EmployeeManage /> },
 ];
 
 export default routes;

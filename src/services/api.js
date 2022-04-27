@@ -6,6 +6,7 @@ const url = {
   login: '/auth',
   signup: '/register',
   employee: '/employees',
+  user: '/users',
 };
 
 const instance = axios.create({
@@ -41,7 +42,7 @@ instance.interceptors.response.use(
           }
           break;
         case 403:
-          // window.location.href = '/no-permission';
+          window.location.href = '/login';
           break;
         default:
           break;
