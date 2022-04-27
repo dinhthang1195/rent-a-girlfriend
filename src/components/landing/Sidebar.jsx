@@ -30,9 +30,6 @@ function Sidebar() {
         </div>
         <div className='list-group list-group-flush my-3'>
           {data.map((data, index) => (
-            // <a key={index} href={data.link} className={color} onClick={onClick}>
-            //   <FontAwesomeIcon icon={data.icon} /> {data.name}
-            // </a>
             <CustomBtn
               key={index}
               link={data.link}
@@ -41,10 +38,6 @@ function Sidebar() {
               name={data.name}
             />
           ))}
-
-          <a href='#' className='list-group-item list-group-item-action bg-transparent second-text text-danger'>
-            <FontAwesomeIcon icon={faRightFromBracket} /> Log Out
-          </a>
         </div>
       </div>
     </>

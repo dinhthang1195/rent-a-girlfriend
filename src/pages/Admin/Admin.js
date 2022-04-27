@@ -10,7 +10,7 @@ function Admin() {
     setSidebarShown(!sidebarShown);
   };
   return (
-    <>
+    <div style={{ transform: 'translate(0,15%)' }}>
       <div className={sidebarShown ? `d-flex` : `d-flex toggled`} id='wrapper'>
         <Sidebar />
         <div id='page-content-wrapper'>
@@ -120,7 +120,7 @@ function Admin() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

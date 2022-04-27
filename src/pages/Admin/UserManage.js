@@ -18,8 +18,6 @@ function UserManage() {
 
   useEffect(() => {
     loadData();
-    console.log(employees);
-    console.log(users);
   }, []);
 
   const loadData = () => {
@@ -47,7 +45,7 @@ function UserManage() {
   };
 
   return (
-    <>
+    <div style={{ transform: 'translate(0,15%)' }}>
       <div className={sidebarShown ? `d-flex` : `d-flex toggled`} id='wrapper'>
         <Sidebar />
         <div id='page-content-wrapper'>
@@ -93,7 +91,7 @@ function UserManage() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
