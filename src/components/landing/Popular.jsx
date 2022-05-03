@@ -26,13 +26,6 @@ function Popular() {
             </button>{' '}
           </div>
         </div>
-        {/* <div className='row align-items-center h-50 text-center '>
-          <div className=' col mb-2  '>
-            <button className='btn btn-sign-in w-30 mx-auto py-3 mb-4'>
-              List of rental girlfriends who left the store
-            </button>
-          </div>
-        </div> */}
       </div>
       <div className='footer-bg '>
         <div className=' container h-100'>

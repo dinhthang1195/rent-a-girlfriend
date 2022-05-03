@@ -119,14 +119,14 @@ ul {
   position: sticky;
 }
 
-.navbar-scroll .nav-link,
-.navbar-scroll .fa-bars,
-.navbar-scroll .navar-brand {
+.text-bl {
   color: #4f4f4f !important;
 }
 
-.navbar-scroll .nav-link:hover {
+.text-bl:hover {
   color: #fd9090 !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
 .welcome {

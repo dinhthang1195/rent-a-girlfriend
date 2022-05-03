@@ -3,10 +3,12 @@ import store from '../store/index';
 
 const url = {
   baseUrl: 'https://rental-gf.herokuapp.com',
+  // baseUrl: 'http://localhost:3500',
   login: '/auth',
   signup: '/register',
   employee: '/employees',
   user: '/users',
+  fe: { employee: '/fe/employees' },
 };
 
 const instance = axios.create({

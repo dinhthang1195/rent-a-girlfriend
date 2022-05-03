@@ -7,7 +7,6 @@ import InfoLanding from '../components/landing/InfoLanding';
 function Landing() {
   return (
     <>
-      <NavSection />
       <div className='hero-header d-flex justify-content-center align-items-center '>
         <img src={CatchCopy} alt='catchlogo' className='catch-logo img-fluid   ' />
       </div>
