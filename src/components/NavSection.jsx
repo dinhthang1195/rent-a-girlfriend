@@ -23,10 +23,6 @@ function NavSection() {
     navigate('/');
   };
 
-  useEffect(() => {
-    console.log('abc');
-  }, []);
-
   const data = [
     {
       link: '/cast',

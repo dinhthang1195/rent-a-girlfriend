@@ -107,7 +107,7 @@ function EmployeeManage() {
       imgPath6: '',
       imgPath7: '',
       imgPath8: '',
-      landingImg: '',
+      landingImg: 'abc',
       timetable: [],
     },
     validationSchema: Yup.object({
@@ -148,7 +148,9 @@ function EmployeeManage() {
   });
 
   const handleFormSubmit = (data) => {
-    if (data.id.length === 0) {
+    console.log(data._id);
+    console.log(data);
+    if (data._id !== '') {
       employeeService
         .add(data)
         .then((res) => {
@@ -161,7 +163,7 @@ function EmployeeManage() {
         });
     } else {
       employeeService
-        .update(data.id, data)
+        .update(data._id, data)
         .then((res) => {
           loadData();
           handleModalClose();
@@ -175,8 +177,8 @@ function EmployeeManage() {
 
   const showModalHandler = (e, id) => {
     if (e) e.preventDefault();
-    console.log(id);
-    if (id.length > 0) {
+    // console.log(id);
+    if (id !== '') {
       employeeService.get(id).then((res) => {
         formik.setValues(res.data);
         handleModalShow();
@@ -276,7 +278,7 @@ function EmployeeManage() {
       </div>
       <Modal show={modalShow} onHide={handleModalClose} backdrop='static' keyboard={false}>
         <Modal.Header closeButton>
-          <Modal.Title>{formik.values.id > 0 ? 'Update' : 'New'} Employee</Modal.Title>
+          <Modal.Title>{formik.values.id !== '' ? 'Update' : 'New'} Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='text-center text-danger'>{message}</div>
@@ -292,7 +294,7 @@ function EmployeeManage() {
               labelSize={4}
             />
             <button
-              class='btn btn-info'
+              className='btn btn-info'
               type='button'
               data-bs-toggle='collapse'
               data-bs-target='#collapseExample'
@@ -301,20 +303,25 @@ function EmployeeManage() {
             >
               Personal Info
             </button>
-            <div class='collapse' id='collapseExample'>
-              <div class='card card-body'>
-                {personalInfo.map((data, index) => (
-                  <Input
-                    type='text'
-                    title={data.capitalName}
-                    id={`txt${data.capitalName}`}
-                    frmField={`formik.getFieldProps(${data.name})`}
-                    err={`formik.touched.${data.name} && formik.errors.${data.name}`}
-                    errMessage={`formik.errors.${data.name}`}
-                    autoComplete='off'
-                    labelSize={4}
-                  />
-                ))}
+            <div className='collapse' id='collapseExample'>
+              <div className='card card-body'>
+                {personalInfo.map((data, index) => {
+                  let name = data.name;
+
+                  return (
+                    <Input
+                      key={index}
+                      type='text'
+                      title={data.capitalName}
+                      id={name}
+                      frmField={formik.getFieldProps(name)}
+                      err={formik.touched.name && formik.errors.name}
+                      errMessage={formik.errors.name}
+                      autoComplete='off'
+                      labelSize={4}
+                    />
+                  );
+                })}
               </div>
             </div>
           </form>

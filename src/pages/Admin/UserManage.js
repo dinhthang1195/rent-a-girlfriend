@@ -30,7 +30,6 @@ function UserManage() {
   };
 
   const RoleDisplay = (roles) => {
-    console.log(roles);
     let roleArray = [];
     for (let role in roles) {
       roleArray.push(role);
