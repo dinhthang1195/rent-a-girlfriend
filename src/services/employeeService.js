@@ -4,7 +4,7 @@ const list = () => api.get(api.url.employee);
 const get = (id) => api.get(`${api.url.employee}/${id}`);
 const add = (data) => api.post(api.url.employee, data);
 const update = (data) => api.put(api.url.employee, data);
-const remove = (id) => api.delete(api.url.employee, id);
+const remove = (data) => api.delete(api.url.employee, data);
 
 const employeeService = {
   list,
@@ -13,7 +13,5 @@ const employeeService = {
   update,
   remove,
 };
-
-
 
 export default employeeService;

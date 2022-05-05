@@ -2,8 +2,8 @@ import axios from 'axios';
 import store from '../store/index';
 
 const url = {
-  baseUrl: 'https://rental-gf.herokuapp.com',
-  // baseUrl: 'http://localhost:3500',
+  // baseUrl: 'https://rental-gf.herokuapp.com',
+  baseUrl: 'http://localhost:3500',
   login: '/auth',
   signup: '/register',
   employee: '/employees',

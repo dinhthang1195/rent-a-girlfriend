@@ -71,7 +71,7 @@ function UserManage() {
                       </th>
                       <th scope='col'>Role</th>
                       <th scope='col'>User</th>
-                      <th scope='col'>Dating Partner</th>
+                      {/* <th scope='col'>Budget</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -80,7 +80,7 @@ function UserManage() {
                         <th scope='row'>{index + 1}</th>
                         <td>{RoleDisplay(user.roles)}</td>
                         <td>{user.username}</td>
-                        <td>$1200</td>
+                        {/* <td>$1200</td> */}
                       </tr>
                     ))}
                   </tbody>

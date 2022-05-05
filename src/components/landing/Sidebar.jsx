@@ -5,11 +5,11 @@ import CustomBtn from '../admin/CustomBtn';
 
 function Sidebar() {
   const data = [
-    {
-      link: '/admin/dashboard',
-      icon: faUserSecret,
-      name: 'Dashboard',
-    },
+    // {
+    //   link: '/admin/dashboard',
+    //   icon: faUserSecret,
+    //   name: 'Dashboard',
+    // },
     {
       link: '/admin/user',
       icon: faUser,

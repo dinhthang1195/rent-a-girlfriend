@@ -30,7 +30,7 @@ function SignInButtonGroup({ handleSignIn, handleLogOut }) {
       <>
         <ul className='navbar-nav'>
           <li className='nav-item me-3  '>
-            <button onClick={() => navigate('/admin/dashboard')} className=' btn text-nowrap btn-primary mb-2 '>
+            <button onClick={() => navigate('/admin/employee')} className=' btn text-nowrap btn-primary mb-2 '>
               Administration
             </button>
           </li>
