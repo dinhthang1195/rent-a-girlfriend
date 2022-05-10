@@ -5,7 +5,6 @@ import SignInButtonGroup from './landing/SignInButtonGroup';
 import { useDispatch } from 'react-redux';
 import ActionTypes from '../store/actions';
 import { Container, Nav, Navbar, NavLink } from 'react-bootstrap';
-import { useEffect } from 'react';
 
 function NavSection() {
   const dispatch = useDispatch();
@@ -25,27 +24,27 @@ function NavSection() {
 
   const data = [
     {
-      link: '/cast',
+      link: '/',
       name: 'Girlfriend List',
     },
     {
-      link: '/price',
+      link: '/',
       name: 'Price',
     },
     {
-      link: '/plan',
+      link: '/',
       name: 'Date Plan',
     },
     {
-      link: '/usage',
+      link: '/',
       name: 'How to use',
     },
     {
-      link: '/experience',
+      link: '/',
       name: 'Experience',
     },
     {
-      link: '/faq',
+      link: '/',
       name: 'FAQ',
     },
   ];
@@ -68,7 +67,7 @@ function NavSection() {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto '>
               {data.map((data, index) => (
-                <Nav.Link as={NavLink} key={index} to={data.link} className=' text-bl  '>
+                <Nav.Link as={Link} key={index} to={data.link} className=' text-bl  '>
                   {data.name}
                 </Nav.Link>
               ))}

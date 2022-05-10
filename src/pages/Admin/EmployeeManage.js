@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Field, useFormik } from 'formik';
-import axios from 'axios';
 
 function EmployeeManage() {
   const [sidebarShown, setSidebarShown] = useState(true);
@@ -20,7 +19,6 @@ function EmployeeManage() {
   const [users, setUsers] = useState([]);
   const [curEmp, setCurEmp] = useState([]);
 
-  const [message, setMessage] = useState('');
   const [modalShow, setModalShow] = useState(false);
   const handleModalShow = () => setModalShow(true);
   const handleModalClose = () => setModalShow(false);
@@ -132,26 +130,32 @@ function EmployeeManage() {
   const showModalHandler = (e, id) => {
     if (e) e.preventDefault();
     console.log(id);
+
     if (id.length > 0) {
       employeeService.get(id).then((res) => {
         formik.setValues(res.data);
         handleModalShow();
-        setCurEmp(res.data);
-        console.log(curEmp); //TODO: 1 click later?
+        setCurEmp(formik.values.timetable);
       });
+
+      // console.log(curEmp); //TODO: 2 click delay ?
     } else {
       formik.resetForm();
       handleModalShow();
     }
   };
 
-  const handleDelete = async (e, data) => {
+  useEffect(() => {
+    console.log(curEmp); //TODO: 1 click delay with with useEffect
+  }, [curEmp]);
+
+  const handleDelete = async (e, id) => {
     e.preventDefault();
-    console.log(data);
-    let emplployeeID = { id: data._id };
-    console.log(emplployeeID);
+
+    console.log(id);
+    //TODO: remove?
     employeeService
-      .remove(emplployeeID) //TODO: remove?
+      .remove(id)
       .then((res) => {
         loadData();
         toast.warning('Delete successful');
@@ -223,7 +227,7 @@ function EmployeeManage() {
                           <a href='/#' className='me-1' onClick={(e) => showModalHandler(e, employee._id)}>
                             <i className='bi-pencil-square text-primary' />
                           </a>
-                          <a href='/#' onClick={(e) => handleDelete(e, employee)}>
+                          <a href='/#' onClick={(e) => handleDelete(e, employee._id)}>
                             <i className='bi-trash text-danger' />
                           </a>
                         </td>
@@ -241,7 +245,6 @@ function EmployeeManage() {
           <Modal.Title>{formik.values.id !== '' ? 'Update' : 'New'} Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className='text-center text-danger'>{message}</div>
           <form>
             <Input
               type='text'

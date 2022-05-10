@@ -256,3 +256,32 @@ ul {
     margin-left: -15rem !important;
   }
 }
+
+.text {
+  display: inline;
+  width: 100%;
+}
+
+.read-or-hide {
+  color: rgb(214, 89, 242);
+  cursor: pointer;
+}
+
+.image {
+  min-width: 150px;
+}
+
+/* Landscape tablets and medium desktops */
+@media (max-width: 991px) {
+  .left-card,
+  .right-card {
+    transform: translateX(0) !important ;
+  }
+  /* .left-card {
+    margin-top: 0 !important;
+  } */
+
+  /* .wrap {
+    word-wrap: break-word !important;
+  } */
+}

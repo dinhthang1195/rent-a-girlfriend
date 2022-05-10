@@ -1,8 +1,14 @@
 import employeeService from '../../services/fe/employeeService';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function EmployeeLanding() {
   const [employees, setEmployees] = useState([]);
+  const navigateTo = useNavigate();
+  const navigate = (e, path) => {
+    e.preventDefault();
+    navigateTo(path);
+  };
 
   useEffect(() => {
     loadData();
@@ -23,7 +29,12 @@ function EmployeeLanding() {
         <div className='row align-items-center h-100 text-center '>
           {employees.map((employee, idx) => (
             <div key={idx} className='col-md-6 col-lg-3 my-2 '>
-              <img src={employee.landingImg} alt={idx} className=' img-fluid ' />
+              <img
+                src={employee.landingImg}
+                alt={idx}
+                className=' img-fluid '
+                onClick={(e) => navigate(e, `/cast/${employee._id}`)}
+              />
               <p className=' '>{employee.name}</p>
             </div>
           ))}
