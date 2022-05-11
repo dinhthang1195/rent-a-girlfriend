@@ -7,11 +7,12 @@ import { useEffect } from 'react';
 import employeeService from '../../services/employeeService';
 import userService from '../../services/userService';
 import Input from '../../components/Input';
+import InputArea from '../../components/InputArea';
 
 import { toast } from 'react-toastify';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Table } from 'react-bootstrap';
 import * as Yup from 'yup';
-import { Field, useFormik } from 'formik';
+import { useFormik } from 'formik';
 
 function EmployeeManage() {
   const [sidebarShown, setSidebarShown] = useState(true);
@@ -21,7 +22,76 @@ function EmployeeManage() {
 
   const [modalShow, setModalShow] = useState(false);
   const handleModalShow = () => setModalShow(true);
-  const handleModalClose = () => setModalShow(false);
+  const handleModalClose = () => {
+    setModalShow(false);
+    setCurEmp([]);
+  };
+
+  const pictures = [
+    {
+      name: 'Profile Picture',
+      id: 'landingImg',
+    },
+    {
+      name: 'Picture 1',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 2',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 3',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 4',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 5',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 6',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 7',
+      id: 'imgPath1',
+    },
+    {
+      name: 'Picture 8',
+      id: 'imgPath1',
+    },
+  ];
+
+  const info = [
+    {
+      name: 'bloodtype',
+    },
+    {
+      name: 'height',
+    },
+    {
+      name: 'birthplace',
+    },
+    {
+      name: 'profession',
+    },
+    {
+      name: 'personality',
+    },
+    {
+      name: 'intro',
+    },
+    {
+      name: 'manager',
+    },
+    {
+      name: 'lineid',
+    },
+  ];
 
   const loadData = () => {
     employeeService.list().then((res) => {
@@ -57,7 +127,13 @@ function EmployeeManage() {
       imgPath7: '',
       imgPath8: '',
       landingImg: 'abc',
-      timetable: [],
+      timetable: [
+        {
+          customer: '',
+          start: '',
+          end: '',
+        },
+      ],
     },
     validationSchema: Yup.object({
       // id: Yup.string()
@@ -129,16 +205,14 @@ function EmployeeManage() {
 
   const showModalHandler = (e, id) => {
     if (e) e.preventDefault();
-    console.log(id);
+    // console.log(id);
 
     if (id.length > 0) {
       employeeService.get(id).then((res) => {
+        setCurEmp(res.data.timetable);
         formik.setValues(res.data);
         handleModalShow();
-        setCurEmp(formik.values.timetable);
       });
-
-      // console.log(curEmp); //TODO: 2 click delay ?
     } else {
       formik.resetForm();
       handleModalShow();
@@ -146,8 +220,14 @@ function EmployeeManage() {
   };
 
   useEffect(() => {
-    console.log(curEmp); //TODO: 1 click delay with with useEffect
+    console.log(curEmp);
   }, [curEmp]);
+
+  const addDate = (e) => {
+    e.preventDefault();
+    setCurEmp([...curEmp, { customer: '', end: '', start: '' }]);
+    // console.log('object');
+  };
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -174,6 +254,22 @@ function EmployeeManage() {
 
     // console.log(users);
   }, []);
+  const customer = (id) => {
+    // console.log(id);
+    let found = users.find((user) => user._id === id);
+    // console.log(found);
+    if (!found) {
+      return '';
+    }
+    return found.username;
+  };
+
+  const removeDate = (e, id, setFieldValue) => {
+    e.preventDefault();
+    let newTime = curEmp.filter((time) => time._id !== id.value._id);
+    setCurEmp(newTime);
+    setFieldValue('timetable', newTime);
+  };
 
   return (
     <div style={{ transform: 'translate(0,20%)' }}>
@@ -240,7 +336,7 @@ function EmployeeManage() {
           </div>
         </div>
       </div>
-      <Modal show={modalShow} onHide={handleModalClose} backdrop='static' keyboard={false}>
+      <Modal show={modalShow} onHide={handleModalClose} backdrop='static' keyboard={false} size='lg'>
         <Modal.Header closeButton>
           <Modal.Title>{formik.values.id !== '' ? 'Update' : 'New'} Employee</Modal.Title>
         </Modal.Header>
@@ -254,7 +350,7 @@ function EmployeeManage() {
               err={formik.touched.name && formik.errors.name}
               errMessage={formik.errors.name}
               autoComplete='off'
-              labelSize={4}
+              labelSize={3}
             />
             <button
               className='btn btn-info me-3'
@@ -268,117 +364,24 @@ function EmployeeManage() {
             </button>
             <div className='collapse' id='collapseExample'>
               <div className='card card-body mb-3'>
-                <Input
-                  type='text'
-                  title='Bloodtype'
-                  id='bloodtype'
-                  frmField={formik.getFieldProps('bloodtype')}
-                  err={formik.touched['bloodtype'] && formik.errors['bloodtype']}
-                  errMessage={formik.errors['bloodtype']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Height'
-                  id='height'
-                  frmField={formik.getFieldProps('height')}
-                  err={formik.touched['height'] && formik.errors['height']}
-                  errMessage={formik.errors['height']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Birthplace'
-                  id='birthplace'
-                  frmField={formik.getFieldProps('birthplace')}
-                  err={formik.touched['birthplace'] && formik.errors['birthplace']}
-                  errMessage={formik.errors['birthplace']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Profession'
-                  id='profession'
-                  frmField={formik.getFieldProps('profession')}
-                  err={formik.touched['profession'] && formik.errors['profession']}
-                  errMessage={formik.errors['profession']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Style'
-                  id='style'
-                  frmField={formik.getFieldProps('style')}
-                  err={formik.touched['style'] && formik.errors['style']}
-                  errMessage={formik.errors['style']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Personality'
-                  id='personality'
-                  frmField={formik.getFieldProps('personality')}
-                  err={formik.touched['personality'] && formik.errors['personality']}
-                  errMessage={formik.errors['personality']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Sake'
-                  id='sake'
-                  frmField={formik.getFieldProps('sake')}
-                  err={formik.touched['sake'] && formik.errors['sake']}
-                  errMessage={formik.errors['sake']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
+                {info.map((info, id) => {
+                  let capitalName = info.name.toUpperCase();
+                  let name = info.name;
 
-                <Input
-                  type='text'
-                  title='Intro'
-                  id='intro'
-                  frmField={formik.getFieldProps('intro')}
-                  err={formik.touched['intro'] && formik.errors['intro']}
-                  errMessage={formik.errors['intro']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Rank'
-                  id='rank'
-                  frmField={formik.getFieldProps('rank')}
-                  err={formik.touched['rank'] && formik.errors['rank']}
-                  errMessage={formik.errors['rank']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Manager'
-                  id='manager'
-                  frmField={formik.getFieldProps('manager')}
-                  err={formik.touched['manager'] && formik.errors['manager']}
-                  errMessage={formik.errors['manager']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Line Id'
-                  id='lineid'
-                  frmField={formik.getFieldProps('lineid')}
-                  err={formik.touched['lineid'] && formik.errors['lineid']}
-                  errMessage={formik.errors['lineid']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
+                  return (
+                    <Input
+                      key={id}
+                      type='text'
+                      title={capitalName}
+                      id={name}
+                      frmField={formik.getFieldProps(name)}
+                      err={formik.touched[name] && formik.errors[name]}
+                      errMessage={formik.errors[name]}
+                      autoComplete='off'
+                      labelSize={3}
+                    />
+                  );
+                })}
               </div>
             </div>
             <button
@@ -393,96 +396,19 @@ function EmployeeManage() {
             </button>
             <div className='collapse' id='collapseExample1'>
               <div className='card card-body mb-3'>
-                <Input
-                  type='text'
-                  title='Profile Picture'
-                  id='landingImg'
-                  frmField={formik.getFieldProps('landingImg')}
-                  err={formik.touched['landingImg'] && formik.errors['landingImg']}
-                  errMessage={formik.errors['landingImg']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 1'
-                  id='imgPath1'
-                  frmField={formik.getFieldProps('imgPath1')}
-                  err={formik.touched['imgPath1'] && formik.errors['imgPath1']}
-                  errMessage={formik.errors['imgPath1']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 2'
-                  id='imgPath2'
-                  frmField={formik.getFieldProps('imgPath2')}
-                  err={formik.touched['imgPath2'] && formik.errors['imgPath2']}
-                  errMessage={formik.errors['imgPath2']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 3'
-                  id='imgPath3'
-                  frmField={formik.getFieldProps('imgPath3')}
-                  err={formik.touched['imgPath3'] && formik.errors['imgPath3']}
-                  errMessage={formik.errors['imgPath3']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 4'
-                  id='imgPath3'
-                  frmField={formik.getFieldProps('imgPath4')}
-                  err={formik.touched['imgPath4'] && formik.errors['imgPath4']}
-                  errMessage={formik.errors['imgPath4']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 5'
-                  id='imgPath5'
-                  frmField={formik.getFieldProps('imgPath5')}
-                  err={formik.touched['imgPath5'] && formik.errors['imgPath5']}
-                  errMessage={formik.errors['imgPath5']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 6'
-                  id='imgPath6'
-                  frmField={formik.getFieldProps('imgPimgPath6ath5')}
-                  err={formik.touched['imgPath6'] && formik.errors['imgPath6']}
-                  errMessage={formik.errors['imgPath6']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 7'
-                  id='imgPath7'
-                  frmField={formik.getFieldProps('imgPath7')}
-                  err={formik.touched['imgPath7'] && formik.errors['imgPath7']}
-                  errMessage={formik.errors['imgPath7']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
-                <Input
-                  type='text'
-                  title='Picture 8'
-                  id='imgPath8'
-                  frmField={formik.getFieldProps('imgPath8')}
-                  err={formik.touched['imgPath8'] && formik.errors['imgPath8']}
-                  errMessage={formik.errors['imgPath8']}
-                  autoComplete='off'
-                  labelSize={4}
-                />
+                {pictures.map((picture, id) => (
+                  <Input
+                    key={id}
+                    type='text'
+                    title={picture.name}
+                    id='landingImg'
+                    frmField={formik.getFieldProps(`${picture.id}`)}
+                    err={formik.touched[`${picture.id}`] && formik.errors[`${picture.id}`]}
+                    errMessage={formik.errors[`${picture.id}`]}
+                    autoComplete='off'
+                    labelSize={3}
+                  />
+                ))}
               </div>
             </div>
             <button
@@ -498,9 +424,83 @@ function EmployeeManage() {
             <div className='collapse' id='collapseExample2'>
               <div className='card card-body mb-3'>
                 {/*TODO: Show current employee's schedule */}
-                {/* {curEmp.map((date, idx) => {
-                  return <div key={idx}> {date.timetable} </div>;
-                })} */}
+                <button
+                  type='button'
+                  className='btn btn-primary fl w-25 m-3 ms-0 text-nowrap'
+                  onClick={(e) => addDate(e)}
+                >
+                  <i className='bi-plus-lg  ' /> Add date
+                </button>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th className='ms-2'>Start Time</th>
+                      <th>End Time</th>
+                      <th>Customer&nbsp;</th>
+                      <th className='ms-2'>Customer's ID</th>
+                    </tr>
+                  </thead>
+                  {curEmp.map((date, idx) => {
+                    return (
+                      <tbody key={idx}>
+                        <tr>
+                          <td>{idx + 1}</td>
+                          {/* <td>{date.start.split('T')[0]}</td> */}
+                          <td>
+                            <InputArea
+                              type='text'
+                              id='start'
+                              frmField={formik.getFieldProps(`timetable[${idx}].start`)}
+                              err={
+                                formik.touched[`timetable[${idx}].start`] && formik.errors[`timetable[${idx}].start`]
+                              }
+                              errMessage={formik.errors[`timetable[${idx}].start`]}
+                              autoComplete='off'
+                            />
+                          </td>
+
+                          {/* <td>{date.end.split('T')[0]}</td> */}
+                          <td>
+                            <InputArea
+                              type='text'
+                              id='end'
+                              frmField={formik.getFieldProps(`timetable[${idx}].end`)}
+                              err={formik.touched[`timetable[${idx}].end`] && formik.errors[`timetable[${idx}].end`]}
+                              errMessage={formik.errors[`timetable[${idx}].end`]}
+                              autoComplete='off'
+                            />
+                          </td>
+
+                          <td>{customer(date.customer)}</td>
+                          <td>
+                            <InputArea
+                              type='text'
+                              id='customer'
+                              frmField={formik.getFieldProps(`timetable[${idx}].customer`)}
+                              err={
+                                formik.touched[`timetable[${idx}].customer`] &&
+                                formik.errors[`timetable[${idx}].customer`]
+                              }
+                              errMessage={formik.errors[`timetable[${idx}].customer`]}
+                              autoComplete='off'
+                            />
+                          </td>
+                          <td>
+                            {/* formik.getFieldProps(`timetable[${idx}]._id`) */}
+                            <div
+                              onClick={(e) =>
+                                removeDate(e, formik.getFieldProps(`timetable[${idx}]`), formik.setFieldValue)
+                              }
+                            >
+                              <i className='bi-trash text-danger' />
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </table>
               </div>
             </div>
           </form>

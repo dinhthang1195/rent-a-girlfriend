@@ -1,5 +1,5 @@
 function Input({ inputRef, type, title, id, labelSize, frmField, err, errMessage, ...others }) {
-  const labelClass = `col-sm-${labelSize ? labelSize : 3}  col-form-label`;
+  const labelClass = `col-sm-${labelSize ? labelSize : 3}  col-form-label  text-nowrap`;
   const inputClass = `form-control ${err ? 'is-invalid' : ''}`;
 
   return (

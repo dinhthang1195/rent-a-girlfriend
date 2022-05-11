@@ -285,3 +285,7 @@ ul {
     word-wrap: break-word !important;
   } */
 }
+
+.modal-70w {
+  width: 100% !important;
+}
