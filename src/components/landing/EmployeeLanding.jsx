@@ -30,6 +30,7 @@ function EmployeeLanding() {
           {employees.map((employee, idx) => (
             <div key={idx} className='col-md-6 col-lg-3 my-2 '>
               <img
+                style={{ cursor: 'pointer' }}
                 src={employee.landingImg}
                 alt={idx}
                 className=' img-fluid '
