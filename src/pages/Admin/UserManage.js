@@ -26,6 +26,7 @@ function UserManage() {
     });
     userService.list().then((res) => {
       setUsers(res.data);
+      console.log(res.data);
     });
   };
 
@@ -70,7 +71,8 @@ function UserManage() {
                         #
                       </th>
                       <th scope='col'>Role</th>
-                      <th scope='col'>User</th>
+                      <th scope='col'>Username</th>
+                      <th scope='col'>Password</th>
                       <th scope='col'>ID</th>
                     </tr>
                   </thead>
@@ -80,6 +82,7 @@ function UserManage() {
                         <th scope='row'>{index + 1}</th>
                         <td>{RoleDisplay(user.roles)}</td>
                         <td>{user.username}</td>
+                        <td>{user.password}</td>
                         <td>{user._id}</td>
                         <td>
                           <div>
