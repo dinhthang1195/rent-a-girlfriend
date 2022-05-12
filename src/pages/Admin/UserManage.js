@@ -61,9 +61,9 @@ function UserManage() {
           </nav>
           <div className='container-fluid px-4'>
             <div className='row my-5'>
-              <h3 className='fs-4 mb-3'>Recent Orders</h3>
+              <h3 className='fs-4 mb-3'>Users</h3>
               <div className='col'>
-                <table className='table bg-white rounded shadow-sm  table-hover'>
+                <table className='table bg-white rounded shadow-sm  table-hover w-75'>
                   <thead>
                     <tr>
                       <th scope='col' width={50}>
@@ -71,7 +71,7 @@ function UserManage() {
                       </th>
                       <th scope='col'>Role</th>
                       <th scope='col'>User</th>
-                      {/* <th scope='col'>Budget</th> */}
+                      <th scope='col'>ID</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -80,7 +80,12 @@ function UserManage() {
                         <th scope='row'>{index + 1}</th>
                         <td>{RoleDisplay(user.roles)}</td>
                         <td>{user.username}</td>
-                        {/* <td>$1200</td> */}
+                        <td>{user._id}</td>
+                        <td>
+                          <div>
+                            <i className='bi-trash text-danger' />
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

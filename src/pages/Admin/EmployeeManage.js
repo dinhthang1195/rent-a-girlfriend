@@ -302,7 +302,7 @@ function EmployeeManage() {
                 </button>
               </div>
               <div className='col'>
-                <table className='table bg-white rounded shadow-sm  table-hover'>
+                <table className='table bg-white rounded shadow-sm  table-hover w-75'>
                   <thead>
                     <tr>
                       <th scope='col' width={50}>
