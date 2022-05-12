@@ -84,11 +84,6 @@ function UserManage() {
                         <td>{user.username}</td>
                         <td>{user.password}</td>
                         <td>{user._id}</td>
-                        <td>
-                          <div>
-                            <i className='bi-trash text-danger' />
-                          </div>
-                        </td>
                       </tr>
                     ))}
                   </tbody>
