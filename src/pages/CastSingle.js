@@ -1,13 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import employeeService from '../services/fe/employeeService';
-import userService from '../services/userService';
+// import userService from '../services/userService';
 import { Carousel, Table, Button } from 'react-bootstrap';
 import ReadMore from '../components/ReadMore';
+
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
+import { addDays } from 'date-fns';
 
 function CastSingle() {
   const param = useParams();
   const navigate = useNavigate();
+
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: 'selection',
+    },
+  ]);
+
+  useEffect(() => {
+    Object.entries(state).forEach(([key, value]) => console.log(key, value));
+  }, [state]);
 
   const [employee, setEmployee] = useState({
     id: '',
@@ -52,7 +70,7 @@ function CastSingle() {
       <div className='container w-100 mt-4 ' style={{ transform: 'translateY(150px)' }}>
         <div className='row'>
           <div className='col text-center'>
-            <h2 className='card-title'>{employee.name}</h2>
+            <h2 className='card-title text-danger'>{employee.name}</h2>
           </div>
         </div>
 
@@ -125,6 +143,26 @@ function CastSingle() {
                   </Table>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className=' container  d-flex flex-column justify-content-center align-items-center'>
+          <div className='row my-3 display-6 text-danger'>What's your ideal time?</div>
+          <div className='row '>
+            <div className=''>
+              <DateRangePicker
+                onChange={(item) => setState([item.selection])}
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                minDate={addDays(new Date(), 0)}
+                maxDate={addDays(new Date(), 30)}
+                months={1}
+                ranges={state}
+                direction='horizontal'
+                preventSnapRefocus={true}
+                calendarFocus='backwards'
+              />
             </div>
           </div>
         </div>
