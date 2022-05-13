@@ -18,13 +18,13 @@ function EmployeeManage() {
   const [sidebarShown, setSidebarShown] = useState(true);
   const [employees, setEmployees] = useState([]);
   const [users, setUsers] = useState([]);
-  const [curEmp, setCurEmp] = useState([]);
+  const [curTimetable, setCurTimetable] = useState([]);
 
   const [modalShow, setModalShow] = useState(false);
   const handleModalShow = () => setModalShow(true);
   const handleModalClose = () => {
     setModalShow(false);
-    setCurEmp([]);
+    setCurTimetable([]);
   };
 
   const pictures = [
@@ -138,7 +138,7 @@ function EmployeeManage() {
     validationSchema: Yup.object({
       // id: Yup.string()
       name: Yup.string().required('Required'),
-      bloodtype: Yup.string().required('Required'),
+      bloodtype: Yup.string(),
       height: Yup.string(),
       birthplace: Yup.string(),
       profession: Yup.string(),
@@ -205,11 +205,10 @@ function EmployeeManage() {
 
   const showModalHandler = (e, id) => {
     if (e) e.preventDefault();
-    // console.log(id);
 
     if (id.length > 0) {
       employeeService.get(id).then((res) => {
-        setCurEmp(res.data.timetable);
+        setCurTimetable(res.data.timetable);
         formik.setValues(res.data);
         handleModalShow();
       });
@@ -220,20 +219,19 @@ function EmployeeManage() {
   };
 
   useEffect(() => {
-    console.log(curEmp);
-  }, [curEmp]);
+    console.log(curTimetable);
+  }, [curTimetable]);
 
   const addDate = (e) => {
     e.preventDefault();
-    setCurEmp([...curEmp, { customer: '', end: '', start: '' }]);
-    // console.log('object');
+    setCurTimetable([...curTimetable, { customer: '', end: '', start: '' }]);
   };
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
 
     console.log(id);
-    //TODO: remove?
+
     employeeService
       .remove(id)
       .then((res) => {
@@ -251,13 +249,9 @@ function EmployeeManage() {
 
   useEffect(() => {
     loadData();
-
-    // console.log(users);
   }, []);
   const customer = (id) => {
-    // console.log(id);
     let found = users.find((user) => user._id === id);
-    // console.log(found);
     if (!found) {
       return '';
     }
@@ -266,8 +260,8 @@ function EmployeeManage() {
 
   const removeDate = (e, id, setFieldValue) => {
     e.preventDefault();
-    let newTime = curEmp.filter((time) => time._id !== id.value._id);
-    setCurEmp(newTime);
+    let newTime = curTimetable.filter((time) => time._id !== id.value._id);
+    setCurTimetable(newTime);
     setFieldValue('timetable', newTime);
   };
 
@@ -441,7 +435,7 @@ function EmployeeManage() {
                       <th className='ms-2'>Customer's ID</th>
                     </tr>
                   </thead>
-                  {curEmp.map((date, idx) => {
+                  {curTimetable.map((date, idx) => {
                     return (
                       <tbody key={idx}>
                         <tr>
