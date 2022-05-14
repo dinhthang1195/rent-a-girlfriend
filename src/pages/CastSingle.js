@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-// import employeeService from '../services/fe/employeeService';
-import employeeService from '../services/employeeService';
+import employeeService from '../services/fe/employeeService';
+// import employeeService from '../services/employeeService';
 import userService from '../services/userService';
 // import userService from '../services/userService';
 
@@ -13,9 +13,7 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { addDays } from 'date-fns';
-
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
+import { toast } from 'react-toastify';
 
 function CastSingle() {
   const param = useParams();
@@ -30,7 +28,7 @@ function CastSingle() {
       key: 'selection',
     },
   ]);
-  const [dateTime, setDateTime] = useState({});
+  // const [dateTime, setDateTime] = useState({});
 
   const [employees, setEmployees] = useState([]);
   const [users, setUsers] = useState([]);
@@ -48,17 +46,14 @@ function CastSingle() {
     loadData();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(dateTime);
-  //   console.log(users);
-  // }, [dateTime]);
   useEffect(() => {
-    console.log(curTimetable);
-  }, [curTimetable]);
-
-  // useEffect(() => {
-  //   console.log(userInfo.username);
-  // }, [userInfo, dateTime]);
+    if (param.id !== '') {
+      employeeService.get(param.id).then((res) => {
+        setEmployee(res.data);
+        setCurTimetable(res.data.timetable);
+      });
+    }
+  }, [param.id]);
 
   const [employee, setEmployee] = useState({
     id: '',
@@ -92,97 +87,34 @@ function CastSingle() {
     ],
   });
 
-  const formik = useFormik({
-    initialValues: {
-      id: '',
-      name: '',
-      bloodtype: "I don't know the type",
-      height: '162cm',
-      birthplace: 'Chiba',
-      profession: 'Cafe clerk',
-      style: 'Standard',
-      personality: 'Quiet',
-      sake: 'Do not drink',
-      tobacco: 'Do not smoke',
-      intro: '',
-      rank: '',
-      manager: '',
-      lineid: '',
-      imgPath1: '',
-      imgPath2: '',
-      imgPath3: '',
-      imgPath4: '',
-      imgPath5: '',
-      imgPath6: '',
-      imgPath7: '',
-      imgPath8: '',
-      landingImg: 'abc',
-      timetable: [
-        {
-          customer: '',
-          start: '',
-          end: '',
-        },
-      ],
-    },
-    validationSchema: Yup.object({
-      // id: Yup.string()
-      name: Yup.string().required('Required'),
-      bloodtype: Yup.string(),
-      height: Yup.string(),
-      birthplace: Yup.string(),
-      profession: Yup.string(),
-      style: Yup.string(),
-      personality: Yup.string(),
-      sake: Yup.string(),
-      tobaco: Yup.string(),
-      intro: Yup.string(),
-      rank: Yup.string(),
-      manager: Yup.string(),
-      lineid: Yup.string(),
-      imgPath1: Yup.string(),
-      imgPath2: Yup.string(),
-      imgPath3: Yup.string(),
-      imgPath4: Yup.string(),
-      imgPath5: Yup.string(),
-      imgPath6: Yup.string(),
-      imgPath7: Yup.string(),
-      imgPath8: Yup.string(),
-      landingImg: Yup.string(),
-      timetable: Yup.array().of(
-        Yup.object({
-          customer: Yup.string(),
-          start: Yup.string(),
-          end: Yup.string(),
-        })
-      ),
-    }),
-  });
-
   const handleBack = () => {
     navigate('/');
   };
 
-  const addDate = (e, setFieldValue) => {
+  const addDate = (e, data) => {
     e.preventDefault();
+
     let user = users.find((user) => user.username === userInfo.username);
-    // console.log(user);
     Object.entries(state).forEach(([key, value]) => {
-      setDateTime({ start: value.startDate, end: value.endDate });
       setCurTimetable([...curTimetable, { customer: user._id, start: value.startDate, end: value.endDate }]);
-      setFieldValue('timetable', curTimetable);
     });
+
+    let newData = { ...data, id: data._id, timetable: curTimetable };
+    updateDate(newData);
   };
 
-  useEffect(() => {
-    if (param.id !== '') {
-      employeeService.get(param.id).then((res) => {
-        formik.setValues(res.data);
-        setEmployee(res.data);
-        setCurTimetable(res.data.timetable);
+  const updateDate = (data) => {
+    employeeService
+      .update(data)
+      .then((res) => {
+        console.log(res);
+        loadData();
+        toast.success('Successful selection.');
+      })
+      .catch((err) => {
+        toast.error(err);
       });
-    }
-  }, [param.id]);
+  };
 
   return (
     <>
@@ -269,21 +201,23 @@ function CastSingle() {
         <div className=' container  d-flex flex-column justify-content-center align-items-center'>
           <div className='row my-3 display-6 text-danger'>What's your ideal time?</div>
           <div className='row '>
-            <DateRangePicker
-              onChange={(item) => setState([item.selection])}
-              showSelectionPreview={true}
-              moveRangeOnFirstSelection={false}
-              minDate={addDays(new Date(), 0)}
-              maxDate={addDays(new Date(), 30)}
-              months={1}
-              ranges={state}
-              direction='horizontal'
-              preventSnapRefocus={true}
-              calendarFocus='backwards'
-            />
+            <form>
+              <DateRangePicker
+                onChange={(item) => setState([item.selection])}
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                minDate={addDays(new Date(), 0)}
+                maxDate={addDays(new Date(), 30)}
+                months={1}
+                ranges={state}
+                direction='horizontal'
+                preventSnapRefocus={true}
+                calendarFocus='backwards'
+              />
+            </form>
           </div>
           <div className='row'>
-            <button type='button' className='btn btn-light-alt w-50' onClick={(e) => addDate(e, formik.setFieldValue)}>
+            <button type='button' className='btn btn-light-alt w-50' onClick={(e) => addDate(e, employee)}>
               Select
             </button>
           </div>
