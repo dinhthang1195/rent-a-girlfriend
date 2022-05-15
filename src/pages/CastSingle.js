@@ -1,9 +1,7 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import employeeService from '../services/fe/employeeService';
-// import employeeService from '../services/employeeService';
 import userService from '../services/userService';
-// import userService from '../services/userService';
 
 import { useSelector } from 'react-redux';
 import { Carousel, Table, Button } from 'react-bootstrap';
@@ -21,6 +19,8 @@ function CastSingle() {
   const userInfo = useSelector((state) => state.auth.currentUser);
 
   const [curTimetable, setCurTimetable] = useState([]);
+  const [flag, setFlag] = useState(false);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -28,15 +28,10 @@ function CastSingle() {
       key: 'selection',
     },
   ]);
-  // const [dateTime, setDateTime] = useState({});
 
-  const [employees, setEmployees] = useState([]);
   const [users, setUsers] = useState([]);
 
   const loadData = () => {
-    employeeService.list().then((res) => {
-      setEmployees(res.data);
-    });
     userService.list().then((res) => {
       setUsers(res.data);
     });
@@ -45,6 +40,10 @@ function CastSingle() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    console.log('Default timetable', curTimetable);
+  }, [curTimetable]);
 
   useEffect(() => {
     if (param.id !== '') {
@@ -91,30 +90,37 @@ function CastSingle() {
     navigate('/');
   };
 
-  const addDate = (e, data) => {
-    e.preventDefault();
-
-    let user = users.find((user) => user.username === userInfo.username);
-    Object.entries(state).forEach(([key, value]) => {
-      setCurTimetable([...curTimetable, { customer: user._id, start: value.startDate, end: value.endDate }]);
-    });
-
-    let newData = { ...data, id: data._id, timetable: curTimetable };
-    updateDate(newData);
-  };
-
   const updateDate = (data) => {
     employeeService
       .update(data)
       .then((res) => {
         console.log(res);
-        loadData();
         toast.success('Successful selection.');
       })
       .catch((err) => {
         toast.error(err);
       });
   };
+
+  let user = users.find((user) => user.username === userInfo.username);
+  const addDate = (data) => {
+    let newData = { ...data, id: data._id, timetable: curTimetable };
+    console.log('Time for addDate ', newData.timetable);
+    updateDate(newData);
+  };
+
+  const updateTimetable = (e) => {
+    e.preventDefault();
+    setFlag(!flag);
+    Object.entries(state).forEach(([key, value]) => {
+      setCurTimetable((prev) => [...prev, { customer: user._id, start: value.startDate, end: value.endDate }]);
+      console.log('newTimetable ', curTimetable);
+    });
+  };
+
+  useEffect(() => {
+    addDate(employee);
+  }, [flag]);
 
   return (
     <>
@@ -217,7 +223,7 @@ function CastSingle() {
             </form>
           </div>
           <div className='row'>
-            <button type='button' className='btn btn-light-alt w-50' onClick={(e) => addDate(e, employee)}>
+            <button type='button' className='btn btn-light-alt w-50' onClick={(e) => updateTimetable(e)}>
               Select
             </button>
           </div>
